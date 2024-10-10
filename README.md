@@ -39,6 +39,10 @@ A full-stack universal Meetup app for web and mobile
 
 -------------------- Second Commit --------------------
 
+4 - Install `npm install dayjs` and use at `EventListItem`
+
+-------------------- Third Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
