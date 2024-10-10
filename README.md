@@ -34,3 +34,11 @@ A full-stack universal Meetup app for web and mobile
 ```
 
 -------------------- First Commit --------------------
+
+3 - Create `EventListItem` component and render events with FlatList at `(tabs)/index.tsx`
+
+-------------------- Second Commit --------------------
+
+## Misc
+
+- Expo icons -> https://icons.expo.fyi
