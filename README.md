@@ -65,6 +65,10 @@ A full-stack universal Meetup app for web and mobile
 
 -------------------- Fifth Commit --------------------
 
+14 - Create `Profile` screen to let user to update their details
+
+-------------------- Sixth Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
