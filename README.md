@@ -93,6 +93,22 @@ INSERT INTO events (id, title, description, date, location, image_uri) VALUES (1
 
 -------------------- Seventh Commit --------------------
 
+18 - _SUPABASE:_ Create `attendance` table with below details to have MANY to MANY relationship
+
+```
+id: already exist
+user_id: not nullable, foreign key to profiles.id, updated -> Cascade, removed -> Cascade
+event_id: not nullable, foreign key to events.id, updated -> Cascade, removed -> Cascade
+```
+
+19 - _SUPABASE:_ Add RLS policies called `Enable insert for authenticated users only` and `Enable read access for all users`
+
+20 - Update `[id].tsx` to insert RSVP clicks to attendence DB
+
+21 - Create `[id]` folder and move existing logic there, and also create `attendance` screen to show who is attending.
+
+-------------------- Eighth Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi

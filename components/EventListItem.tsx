@@ -1,11 +1,28 @@
 import Feather from '@expo/vector-icons/Feather';
 import dayjs from 'dayjs';
 import { Link } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 
+import { supabase } from '~/utils/supabase';
+
 export default function EventListItem({ event }: { event: any }) {
+  const [numberOfAttendees, setNumberOfAttendees] = useState<any>(0);
+
+  useEffect(() => {
+    fetchNumberOfAttendees();
+  }, [event.id]);
+
+  const fetchNumberOfAttendees = async () => {
+    const { count } = await supabase
+      .from('attendance')
+      .select('*', { count: 'exact', head: true })
+      .eq('event_id', event.id);
+    setNumberOfAttendees(count);
+  };
+
   return (
-    <Link href={`/${event.id}`} asChild>
+    <Link href={`/event/${event.id}`} asChild>
       <Pressable className="m-3 gap-3 border-b-2 border-gray-100 pb-3">
         <View className="flex-row">
           <View className="flex-1 gap-2">
@@ -25,7 +42,7 @@ export default function EventListItem({ event }: { event: any }) {
 
         {/* Footer */}
         <View className="flex-row gap-3">
-          <Text className="mr-auto text-gray-700">16 going</Text>
+          <Text className="mr-auto text-gray-700">{numberOfAttendees} going</Text>
 
           <Feather name="share" size={20} color="gray" />
           <Feather name="bookmark" size={20} color="gray" />
