@@ -109,6 +109,16 @@ event_id: not nullable, foreign key to events.id, updated -> Cascade, removed ->
 
 -------------------- Eighth Commit --------------------
 
+22 - Install `npm install react-native-date-picker`
+
+23 - Run `npx expo prebuild` to create a prebuild and then run `npx expo run ios` to create an ios build
+
+24 - Create new route `(tabs)/create` and implement creation of events
+
+25 - _SUPABASE:_ Add RLS policy called `Enable insert for authenticated users only`
+
+-------------------- Nineth Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
@@ -116,3 +126,4 @@ event_id: not nullable, foreign key to events.id, updated -> Cascade, removed ->
 ## Credits
 
 [Full Stack Meetup Clone with React Native, Expo and Supabase](https://www.youtube.com/watch?v=amM52EADmRY)
+[Meetup Clone with React Native: Advanced Backend, Maps, GEO Filtering](https://www.youtube.com/watch?v=R2L5x8i3FJI)
