@@ -61,7 +61,7 @@ A full-stack universal Meetup app for web and mobile
 
 12 - _SUPABASE:_ Go to the `Authentication -> Providers` and select Email to disable `Confirm email`
 
-13 - Creat `AuthProvider` and implement auth flow
+13 - Create `AuthProvider` and implement auth flow
 
 -------------------- Fifth Commit --------------------
 
@@ -69,6 +69,34 @@ A full-stack universal Meetup app for web and mobile
 
 -------------------- Sixth Commit --------------------
 
+15 - _SUPABASE:_ Create `events` table with below details.
+
+```
+id: already exist
+title: text, not nullable
+description: text
+date: timestampz
+location: text
+image_uri: text
+user_id: foreign key to profiles.id, updated -> Cascade, removed -> Set NULL
+```
+
+16 - _SUPABASE:_ Use ChatGPT to generate some event via SQL Editor, sample query like below
+
+```
+INSERT INTO events (id, title, description, date, location, image_uri) VALUES (1, 'React Native Workshop', 'Learn the basics of React Native and build your first app.', '2024-10-10T14:00:00+00:00', 'Tech Hub, Barcelona', 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg');
+```
+
+16 - _SUPABASE:_ Add RLS policy called `Enable read access for all users`
+
+17 - Update `(tabs)/index` to fetch events from DB and also `[id].tsx` page to fetch single event from DB too
+
+-------------------- Seventh Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
+
+## Credits
+
+[Full Stack Meetup Clone with React Native, Expo and Supabase](https://www.youtube.com/watch?v=amM52EADmRY)
