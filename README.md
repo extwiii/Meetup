@@ -131,6 +131,28 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey {...
 
 -------------------- Tenth Commit --------------------
 
+29 - Run `npx expo install expo-image-picker` to install image picker
+
+30 - Create Avatar components, copied from link of Step 6
+
+31 - Run `npx expo prebuild` to create prebuild version and then run `npx expo run ios` to run on simulator
+
+32 - Update `app.json` with below details
+
+```
+"plugins": [
+  "expo-router",
+  [
+    "expo-image-picker",
+    {
+      "photosPermission": "The app accesses your photos to let you share them with your friends."
+    }
+  ]
+],
+```
+
+-------------------- Eleventh Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
