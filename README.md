@@ -117,7 +117,19 @@ event_id: not nullable, foreign key to events.id, updated -> Cascade, removed ->
 
 25 - _SUPABASE:_ Add RLS policy called `Enable insert for authenticated users only`
 
--------------------- Nineth Commit --------------------
+-------------------- Ninth Commit --------------------
+
+26 - Generating types -> https://supabase.com/docs/guides/api/rest/generating-types -> follow cli version for this
+
+27 - Create a file `types/supabase.ts` and run `npx supabase gen types typescript --linked > types/supabase.ts` to generate types from supabase
+
+28 - Use types in the `utils/supabase.ts` like below
+
+```
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey {...})
+```
+
+-------------------- Tenth Commit --------------------
 
 ## Misc
 

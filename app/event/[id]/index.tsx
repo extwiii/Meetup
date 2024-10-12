@@ -4,12 +4,13 @@ import { useEffect, useState } from 'react';
 import { Text, View, Image, Pressable, ActivityIndicator } from 'react-native';
 
 import { useAuth } from '~/contexts/AuthProvider';
+import { Attendance, Event } from '~/types/db';
 import { supabase } from '~/utils/supabase';
 
 export default function EventPage() {
   const { id } = useLocalSearchParams();
-  const [event, setEvent] = useState<any>(null);
-  const [attendance, setAttendance] = useState(null);
+  const [event, setEvent] = useState<Event | null>(null);
+  const [attendance, setAttendance] = useState<Attendance | null>(null);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
@@ -27,16 +28,21 @@ export default function EventPage() {
       .eq('user_id', user.id)
       .eq('event_id', id)
       .single();
+
     setAttendance(attendanceData);
     setLoading(false);
   };
 
   const joinEvent = async () => {
+    if (!event) {
+      return;
+    }
     const { data } = await supabase
       .from('attendance')
       .insert({ user_id: user.id, event_id: event.id })
       .select()
       .single();
+
     setAttendance(data);
   };
 
@@ -53,7 +59,10 @@ export default function EventPage() {
       <Stack.Screen
         options={{ title: 'Event', headerBackTitleVisible: false, headerTintColor: 'black' }}
       />
-      <Image source={{ uri: event.image_uri }} className="aspect-video w-full rounded-xl" />
+      {event.image_uri && (
+        <Image source={{ uri: event.image_uri }} className="aspect-video w-full rounded-xl" />
+      )}
+
       <Text className="text-3xl font-bold" numberOfLines={2}>
         {event.title}
       </Text>
