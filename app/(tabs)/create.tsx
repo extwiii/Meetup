@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Text, View, TextInput, Pressable, Alert } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
+import Avatar from '~/components/Avatar';
 import { useAuth } from '~/contexts/AuthProvider';
 import { supabase } from '~/utils/supabase';
 
@@ -11,6 +12,8 @@ export default function CreateEvent() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date());
+  const [imageUrl, setImageUrl] = useState('');
+
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
@@ -26,6 +29,7 @@ export default function CreateEvent() {
           description,
           date: date.toISOString(),
           user_id: user.id,
+          image_uri: imageUrl,
         },
       ])
       .select()
@@ -46,9 +50,17 @@ export default function CreateEvent() {
 
   return (
     <View className="flex-1 gap-3 bg-white p-5">
+      <View className="items-center ">
+        <Avatar
+          size={200}
+          url={imageUrl}
+          onUpload={(url: string) => {
+            setImageUrl(url);
+          }}
+        />
+      </View>
       <TextInput
         value={title}
-        // onChangeText={(text) => setTitle(text)}
         onChangeText={setTitle}
         placeholder="Title"
         className="rounded-md border border-gray-200 p-3"

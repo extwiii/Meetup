@@ -153,6 +153,10 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey {...
 
 -------------------- Eleventh Commit --------------------
 
+33 - Create `SupaImage` component to render images from supabase storage
+
+-------------------- Twelfth Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
