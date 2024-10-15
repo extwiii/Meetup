@@ -157,6 +157,67 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey {...
 
 -------------------- Twelfth Commit --------------------
 
+34 - _SUPABASE:_ Follow -> https://supabase.com/docs/guides/database/extensions/postgis?language=js&queryGroups=language to use GEO data in Postgres with PostGiS (extensions is the one not gis)
+
+35 - _SUPABASE:_ Add new column called `location_point` to `events table`
+
+36 - _SUPABASE:_ Create index to speed things up, paste below code to SQL Editor
+
+```
+create index events_geo_index
+  on public.events
+  using GIST (location_point);
+```
+
+37 - _SUPABASE:_ Create Nearby Events database function
+
+```
+CREATE OR REPLACE FUNCTION nearby_events(lat FLOAT, long FLOAT)
+RETURNS TABLE (
+  id          public.events.id%TYPE,
+  created_at  public.events.created_at%TYPE,
+  title       public.events.title%TYPE,
+  description public.events.description%TYPE,
+  date        public.events.date%TYPE,
+  location    public.events.location%TYPE,
+  image_uri   public.events.image_uri%TYPE,
+  user_id     public.events.user_id%TYPE,
+  lat         FLOAT,
+  long        FLOAT,
+  dist_meters FLOAT
+)
+LANGUAGE sql
+AS $$
+  SELECT
+    id,
+    created_at,
+    title,
+    description,
+    date,
+    location,
+    image_uri,
+    user_id,
+    ST_Y(location_point::geometry) AS lat,
+    ST_X(location_point::geometry) AS long,
+    ST_Distance(location_point, ST_Point(long, lat)::geography) AS dist_meters
+  FROM
+    public.events
+  ORDER BY
+    location_point <-> ST_Point(long, lat)::geography;
+$$;
+
+```
+
+38 - Then call `nearby_events` from `(tabs)/index`
+
+```
+const { data, error } = await supabase.rpc('nearby_events', { lat, long });
+```
+
+39 - Run `Step 27` to generate types again
+
+-------------------- Thirteenth Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi

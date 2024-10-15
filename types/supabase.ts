@@ -72,6 +72,7 @@ export type Database = {
           id: number;
           image_uri: string | null;
           location: string | null;
+          location_point: unknown | null;
           title: string;
           user_id: string | null;
         };
@@ -82,6 +83,7 @@ export type Database = {
           id?: number;
           image_uri?: string | null;
           location?: string | null;
+          location_point?: unknown | null;
           title: string;
           user_id?: string | null;
         };
@@ -92,6 +94,7 @@ export type Database = {
           id?: number;
           image_uri?: string | null;
           location?: string | null;
+          location_point?: unknown | null;
           title?: string;
           user_id?: string | null;
         };
@@ -130,22 +133,32 @@ export type Database = {
           username?: string | null;
           website?: string | null;
         };
-        Relationships: [
-          {
-            foreignKeyName: 'profiles_id_fkey';
-            columns: ['id'];
-            isOneToOne: true;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
-          },
-        ];
+        Relationships: [];
       };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      nearby_events: {
+        Args: {
+          lat: number;
+          long: number;
+        };
+        Returns: {
+          id: number;
+          created_at: string;
+          title: string;
+          description: string;
+          date: string;
+          location: string;
+          image_uri: string;
+          user_id: string;
+          lat: number;
+          long: number;
+          dist_meters: number;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -228,4 +241,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
     ? PublicSchema['Enums'][PublicEnumNameOrOptions]
+    : never;
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema['CompositeTypes']
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']
+    ? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
     : never;
