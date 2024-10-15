@@ -224,6 +224,12 @@ const { data, error } = await supabase.rpc('nearby_events', { lat, long });
 
 -------------------- Fourteenth Commit --------------------
 
+42 - Follow `https://docs.mapbox.com/api/search/search-box/` for Address autocomplete with Mapbox
+
+43 - Generate access token from Mapbox Tokens section and update `.env` file
+
+43 - Create `AddressAutocomplete` util function to use Mapbox API and component to consume the result
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi

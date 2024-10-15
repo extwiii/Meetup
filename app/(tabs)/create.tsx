@@ -1,8 +1,9 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Text, View, TextInput, Pressable, Alert } from 'react-native';
+import { Text, View, TextInput, Pressable, Alert, ScrollView } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
+import AddressAutocomplete from '~/components/AddressAutocomplete';
 import Avatar from '~/components/Avatar';
 import { useAuth } from '~/contexts/AuthProvider';
 import { supabase } from '~/utils/supabase';
@@ -13,6 +14,7 @@ export default function CreateEvent() {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date());
   const [imageUrl, setImageUrl] = useState('');
+  const [location, setLocation] = useState<any>(null);
 
   const [loading, setLoading] = useState(false);
 
@@ -20,6 +22,9 @@ export default function CreateEvent() {
 
   const createEvent = async () => {
     setLoading(true);
+
+    const long = location.features[0].geometry.coordinates[0];
+    const lat = location.features[0].geometry.coordinates[1];
 
     const { data, error } = await supabase
       .from('events')
@@ -30,7 +35,8 @@ export default function CreateEvent() {
           date: date.toISOString(),
           user_id: user.id,
           image_uri: imageUrl,
-          location_point: 'POINT(2.1 41.3)',
+          location: location.features[0].properties.name,
+          location_point: `POINT(${long} ${lat})`,
         },
       ])
       .select()
@@ -50,7 +56,7 @@ export default function CreateEvent() {
   };
 
   return (
-    <View className="flex-1 gap-3 bg-white p-5">
+    <ScrollView className="flex-1" contentContainerClassName="gap-3 bg-white p-5">
       <View className="items-center ">
         <Avatar
           size={200}
@@ -91,12 +97,15 @@ export default function CreateEvent() {
           setOpen(false);
         }}
       />
+
+      <AddressAutocomplete onSelected={(location: any) => setLocation(location)} />
+
       <Pressable
         onPress={() => createEvent()}
         disabled={loading}
         className="mt-auto items-center rounded-md bg-red-500 p-3 px-8">
         <Text className="text-lg font-bold text-white">Create event</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 }
