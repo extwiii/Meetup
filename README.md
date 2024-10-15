@@ -111,7 +111,7 @@ event_id: not nullable, foreign key to events.id, updated -> Cascade, removed ->
 
 22 - Install `npm install react-native-date-picker`
 
-23 - Run `npx expo prebuild` to create a prebuild and then run `npx expo run ios` to create an ios build
+23 - Run `npx expo prebuild --clean` to create a prebuild and then run `npx expo run ios` to create an ios build
 
 24 - Create new route `(tabs)/create` and implement creation of events
 
@@ -217,6 +217,12 @@ const { data, error } = await supabase.rpc('nearby_events', { lat, long });
 39 - Run `Step 27` to generate types again
 
 -------------------- Thirteenth Commit --------------------
+
+40 - Follow `https://docs.expo.dev/versions/latest/sdk/location/` to Install `expo-location`
+
+41 - Update `(tabs)/index` and Run `Step 23` to create a new build again
+
+-------------------- Fourteenth Commit --------------------
 
 ## Misc
 
