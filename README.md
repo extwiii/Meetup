@@ -230,6 +230,14 @@ const { data, error } = await supabase.rpc('nearby_events', { lat, long });
 
 43 - Create `AddressAutocomplete` util function to use Mapbox API and component to consume the result
 
+-------------------- Fifteenth Commit --------------------
+
+44 - Follow `https://rnmapbox.github.io/docs/install` to implement map view and Run `Step 23` to create a new build again
+
+45 - Add another route to show map and events locations. Let user to see details of event when clicked.
+
+-------------------- Fifteenth Commit --------------------
+
 ## Misc
 
 - Expo icons -> https://icons.expo.fyi
