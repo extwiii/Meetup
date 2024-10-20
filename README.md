@@ -2,13 +2,19 @@
 
 A full-stack universal Meetup app for web and mobile
 
-- React Native
-- Expo
-- Expo Router
+- React Native / Expo
+- Typescript
 - Nativewind
 - Supabase
 
+<img width="128" alt="expo-logo" src="https://github.com/user-attachments/assets/44858dd9-939c-4483-82a4-b59150bff857">
+<img width="64" alt="expo-logo" src="https://github.com/user-attachments/assets/a8122b96-9219-4812-8484-59d57237b10c">
+<img width="96" alt="expo-logo" src="https://github.com/user-attachments/assets/20d5245c-e350-4a41-b182-97ed19f77066">
+<img width="128" alt="expo-logo" src="https://github.com/user-attachments/assets/1165c9f9-9c51-4099-942b-bc8f3820491d">
+
 ## SS
+
+<img width="1000" alt="Screenshot 2024-10-16 at 06 09 42" src="https://github.com/user-attachments/assets/2831c3b0-0c1e-45ea-9d55-c48939a5c3e7">
 
 ## Documentation
 
